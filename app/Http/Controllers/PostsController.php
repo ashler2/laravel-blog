@@ -26,8 +26,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        
+    {  
         return view('posts.create');
     }
 
@@ -39,7 +38,18 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $validatedData = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);
+        $post = new Post;
+        $post->title = $request->title; 
+        $post->body = $request->body; 
+        $post->save();
+        
+        return redirect()->to('posts');
     }
 
     /**
