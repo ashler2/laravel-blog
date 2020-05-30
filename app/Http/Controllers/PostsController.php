@@ -16,7 +16,7 @@ class PostsController extends Controller
     {
         
         // $posts = Post::orderBy('title', 'desc')->get();
-        $posts = Post::orderBy('title', 'desc')->paginate(10);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('posts.index')->with('posts', $posts);
     }
 
@@ -42,14 +42,14 @@ class PostsController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
+            'article_body' => 'required',
         ]);
         $post = new Post;
-        $post->title = $request->title; 
-        $post->body = $request->body; 
+        $post->title = $request->input('title'); 
+        $post->body = $request->input('article_body'); 
         $post->save();
         
-        return redirect()->to('posts');
+        return redirect()->to('posts')->with('success', 'Post created');
     }
 
     /**

@@ -5,12 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/app.css')}}">
         <title>{{ config('app.name', 'Blog App')  }}</title>
+        <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
 
     </head>
     <body>
         @include('inc.navbar')
         <div class="container">
+            @include('inc.messages')
             @yield('content')
         </div>
+       
     </body>
 </html>
