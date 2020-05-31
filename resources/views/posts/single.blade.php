@@ -7,7 +7,13 @@
     {!! $post->body !!}
   </div>
   <hr>
-<small>Written on {{$post->created_at}}</small>
-
+  <small>Written on {{$post->created_at}}</small>
+  <hr>
+  <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a>
+  <form action="{{ route('posts.destroy', $post->id) }}" class="" method="POST">
+    @csrf
+    {{method_field('Delete')}}
+    <button class="" type="submit">Destroy</button>
+  </form>
     
 @endsection
