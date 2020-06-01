@@ -13,8 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <a href="{{ route('posts.create') }}" class="btn btn-primary"> Create Blog Post</a>
+                    <h3>Your blog Posts</h3>
+                    <div class="">
+                        @foreach ($posts as $post)
+                    <h1>{{ $post->title}}</h1>
+                        @endforeach
 
-                    You are logged in!
+                    </div>
+
                 </div>
             </div>
         </div>

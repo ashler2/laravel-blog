@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-class HomeController extends Controller
+use App\Post;
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,7 +22,9 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+        $id = auth()->user()->id;
+        $posts = Post::where('user_id', $id)->get();
+        return view('dashboard')->with('posts', $posts);
     }
 }
