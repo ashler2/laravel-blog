@@ -15,12 +15,37 @@
                     @endif
                     <a href="{{ route('posts.create') }}" class="btn btn-primary"> Create Blog Post</a>
                     <h3>Your blog Posts</h3>
-                    <div class="">
+                    @if (count($posts) > 0 )
+                        
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Title</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
                         @foreach ($posts as $post)
-                    <h1>{{ $post->title}}</h1>
+                        <tr>
+                            <td>{{ $post->title}}</td>
+                            <td>
+                                <a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form action="{{ route('posts.destroy', $post->id) }}" class="" method="POST">
+                                    @csrf
+                                    {{method_field('Delete')}}
+                                    <button class="btn btn-danger" type="submit">Destroy</button>
+                              </form>
+                            </td>
+
+                        </tr>
                         @endforeach
 
-                    </div>
+                    </table>
+                    @else 
+                        <h4>
+                            Create your first post to be shown here!
+                        </h4>
+                    @endif
 
                 </div>
             </div>

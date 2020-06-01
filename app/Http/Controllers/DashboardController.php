@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 class DashboardController extends Controller
 {
     /**
@@ -23,8 +24,8 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-        $id = auth()->user()->id;
-        $posts = Post::where('user_id', $id)->get();
-        return view('dashboard')->with('posts', $posts);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        return view('dashboard')->with('posts', $user->posts);
     }
 }

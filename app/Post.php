@@ -10,4 +10,8 @@ class Post extends Model
     // protected $table = 'post'; to change default table
     // change primary key
 
+    public function user ()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

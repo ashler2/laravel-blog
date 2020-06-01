@@ -18,6 +18,9 @@
       </textarea>
     </div>
     <div class="form-group">
+      <input type="file" name="cover_image" id="cover_image">
+    </div>
+    <div class="form-group">
       <button type="submit" id="blog-submit" class="btn btn-primary">Form Submit</button>
     </div>
  
