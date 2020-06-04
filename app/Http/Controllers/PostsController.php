@@ -29,8 +29,6 @@ class PostsController extends Controller
      */
     public function index()
     {
-        
-        // $posts = Post::orderBy('title', 'desc')->get();
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('posts.index')->with('posts', $posts);
     }
@@ -128,16 +126,11 @@ class PostsController extends Controller
         ]);
 
         if($request->hasFile('cover_image')) {
-            // Get Filename with extention 
             $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            // Get Just Filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // GET EXTENSION
             $extension = $request->file('cover_image')->getClientOriginalExtension();
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload Image
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-            // Link store with public by artisan 
         } 
         $post = Post::find($id);
         $post->title = $request->input('title'); 
